@@ -310,4 +310,20 @@ class GradesController < ApplicationController
   def mean(array)
     array.inject(0) {|sum, x| sum += x } / array.size.to_f
   end
+
+  def insert_history_on_edit_grade
+    participant = AssignmentParticipant.find_by(id: params[:participant_id])
+    @team = participant.team
+    @team.grade_for_submission = params[:grade_for_submission]
+    @team.comment_for_submission = params[:comment_for_submission]
+    begin
+      @team.save
+      flash[:success] = 'Grade and comment for submission successfully saved.'
+    rescue StandardError
+      flash[:error] = $ERROR_INFO
+    end
+    redirect_to controller: 'grades', action: 'view_team', id: participant.id
+  end
+
+
 end
