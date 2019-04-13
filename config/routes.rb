@@ -1,4 +1,5 @@
 Expertiza::Application.routes.draw do
+  resources :grade_histories
   ###
   # Please insert new routes alphabetically!
   ###

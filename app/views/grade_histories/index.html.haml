@@ -1,0 +1,19 @@
+%h1 Listing grade_histories
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @grade_histories.each do |grade_history|
+      %tr
+        %td= link_to 'Show', grade_history
+        %td= link_to 'Edit', edit_grade_history_path(grade_history)
+        %td= link_to 'Destroy', grade_history, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Grade history', new_grade_history_path
